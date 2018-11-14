@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       title: 'Baby Sleep Noise',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
-      home: new MyHomePage(),
+      home: Scaffold(body: new MyHomePage()),
     );
   }
 }
@@ -25,19 +25,34 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   AudioPlayer audioPlayer;
+  bool playing = false;
 
   @override
   void initState() {
+    AudioPlayer.logEnabled = true;
     audioPlayer = new AudioPlayer();
     super.initState();
   }
 
-  playLocal() async {
-    int result = await audioPlayer.play("sounds/white_noise.mp3", isLocal: true);
+  playLocal(int index) async {
+    if(!playing) {
+      int result = await audioPlayer.play(
+          "sounds/"+soundList[index], isLocal: true).whenComplete(() {
+        playing = true;
+      });
+    }else{
+      Scaffold.of(context).showSnackBar(new SnackBar(content: Text("stop the current sound first!")));
+    }
   }
 
   stopLocal() async {
-    int result = await audioPlayer.stop();
+    if(playing) {
+      int result = await audioPlayer.stop().whenComplete(() {
+        playing = false;
+      });
+    }else{
+      Scaffold.of(context).showSnackBar(new SnackBar(content: Text("no sound playing!")));
+    }
   }
 
 
@@ -50,13 +65,20 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: new ListView.builder(
         itemCount: soundList.length,
-        itemBuilder: (context,index)=>new ListTile(leading: CircleAvatar(child: Icon(Icons.play_arrow),),title: Text(soundList[index]),),
+        itemBuilder: (context,index)=>
+          new ListTile(leading: CircleAvatar(child: Icon(Icons.play_arrow),),title: Text(soundList[index]),onTap: ()=>playLocal(index),),
       ),
+      floatingActionButton: new FloatingActionButton(mini:true,onPressed: stopLocal,child: Icon(Icons.stop),),
       bottomNavigationBar: new BottomNavigationBar(items: [
         BottomNavigationBarItem(icon: Icon(Icons.cloud_circle), title: Text("Sounds")),
         BottomNavigationBarItem(icon: Icon(Icons.settings), title: Text("Settings")),
-
-      ],),
+      ],
+      ),
     );
+  }
+  @override
+  void dispose() {
+    playing = false;
+    super.dispose();
   }
 }
