@@ -1,4 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:baby_sleep_noise/utils.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(new MyApp());
@@ -35,6 +36,10 @@ class _MyHomePageState extends State<MyHomePage> {
     int result = await audioPlayer.play("sounds/white_noise.mp3", isLocal: true);
   }
 
+  stopLocal() async {
+    int result = await audioPlayer.stop();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +48,9 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         title: new Text("Baby Sleep Noise"),
       ),
-      body: new ListView(
-        children: <Widget>[
-          new ListTile(leading: CircleAvatar(child: Icon(Icons.play_arrow),),title: Text("White Noise"),),
-          new ListTile(leading: CircleAvatar(child: Icon(Icons.play_arrow),),title: Text("White Noise"),),
-          new ListTile(leading: CircleAvatar(child: Icon(Icons.play_arrow),),title: Text("White Noise"),),
-          new ListTile(leading: CircleAvatar(child: Icon(Icons.play_arrow),),title: Text("White Noise"),),
-          new ListTile(leading: CircleAvatar(child: Icon(Icons.play_arrow),),title: Text("White Noise"),),
-        ],
+      body: new ListView.builder(
+        itemCount: soundList.length,
+        itemBuilder: (context,index)=>new ListTile(leading: CircleAvatar(child: Icon(Icons.play_arrow),),title: Text(soundList[index]),),
       ),
       bottomNavigationBar: new BottomNavigationBar(items: [
         BottomNavigationBarItem(icon: Icon(Icons.cloud_circle), title: Text("Sounds")),
