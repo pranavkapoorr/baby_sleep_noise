@@ -39,27 +39,27 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-   - sounds/blender_noise.mp3
-   - sounds/boiling_noise.mp3
-   - sounds/dryer_noise.mp3
-   - sounds/dryer_noise1.mp3
-   - sounds/fan_noise.mp3
-   - sounds/heater_noise.mp3
-   - sounds/ocean_noise.mp3
-   - sounds/ocean_noise1.mp3
-   - sounds/pink_noise.mp3
-   - sounds/rain_noise.mp3
-   - sounds/rain_noise1.mp3
-   - sounds/shower_noise.mp3
-   - sounds/storm_noise.mp3
-   - sounds/stream_noise.mp3
-   - sounds/train_noise.mp3
-   - sounds/underwater_noise.mp3
-   - sounds/vaccuum_noise.mp3
-   - sounds/waterfall_noise.mp3
-   - sounds/waves_noise.mp3
-   - sounds/white_noise.mp3
-   - sounds/white_noise1.mp3
+   - assets/sounds/blender_noise.mp3
+   - assets/sounds/boiling_noise.mp3
+   - assets/sounds/dryer_noise.mp3
+   - assets/sounds/dryer_noise1.mp3
+   - assets/sounds/fan_noise.mp3
+   - assets/sounds/heater_noise.mp3
+   - assets/sounds/ocean_noise.mp3
+   - assets/sounds/ocean_noise1.mp3
+   - assets/sounds/pink_noise.mp3
+   - assets/sounds/rain_noise.mp3
+   - assets/sounds/rain_noise1.mp3
+   - assets/sounds/shower_noise.mp3
+   - assets/sounds/storm_noise.mp3
+   - assets/sounds/stream_noise.mp3
+   - assets/sounds/train_noise.mp3
+   - assets/sounds/underwater_noise.mp3
+   - assets/sounds/vaccuum_noise.mp3
+   - assets/sounds/waterfall_noise.mp3
+   - assets/sounds/waves_noise.mp3
+   - assets/sounds/white_noise.mp3
+   - assets/sounds/white_noise1.mp3
    #- images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

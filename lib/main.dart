@@ -1,3 +1,4 @@
+import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:baby_sleep_noise/utils.dart';
 import 'package:flutter/material.dart';
@@ -24,32 +25,32 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  AudioPlayer audioPlayer;
+  int _currentlyPlaying;
+  AudioCache audio;
+  AudioPlayer player;
   bool playing = false;
 
   @override
   void initState() {
-    AudioPlayer.logEnabled = true;
-    audioPlayer = new AudioPlayer();
+    audio = new AudioCache(prefix: "sounds/");
     super.initState();
   }
 
-  playLocal(int index) async {
+  playLocal(int index) async{
     if(!playing) {
-      int result = await audioPlayer.play(
-          "sounds/"+soundList[index], isLocal: true).whenComplete(() {
+       player = await audio.play(soundList[index]);
+       _currentlyPlaying = index;
         playing = true;
-      });
+
     }else{
       Scaffold.of(context).showSnackBar(new SnackBar(content: Text("stop the current sound first!")));
     }
   }
 
-  stopLocal() async {
+  stopLocal() async{
     if(playing) {
-      int result = await audioPlayer.stop().whenComplete(() {
+      await player.stop();
         playing = false;
-      });
     }else{
       Scaffold.of(context).showSnackBar(new SnackBar(content: Text("no sound playing!")));
     }
