@@ -42,7 +42,7 @@ class _LogoPageState extends State<LogoPage> {
     Navigator.of(context).pushReplacement(new PageRouteBuilder(
         maintainState: true,
         opaque: true,
-        pageBuilder: (context, _, __) => new SleepNoiseHomeScreen(),
+        pageBuilder: (context, _, __) => Scaffold(body: new SleepNoiseHomeScreen()),
         transitionDuration: const Duration(seconds: 2),
         transitionsBuilder: (context, anim1, anim2, child) {
           return new FadeTransition(

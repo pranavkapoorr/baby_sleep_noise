@@ -24,8 +24,10 @@ class _SleepNoiseHomeScreenState extends State<SleepNoiseHomeScreen> {
   playLocal(int index) async{
     if(!playing) {
       player = await audio.play(soundList[index]);
-      _currentlyPlaying = index;
-      playing = true;
+      setState(() {
+        _currentlyPlaying = index;
+        playing = true;
+      });
 
     }else{
       Scaffold.of(context).showSnackBar(new SnackBar(content: Text("stop the current sound first!")));
@@ -35,7 +37,10 @@ class _SleepNoiseHomeScreenState extends State<SleepNoiseHomeScreen> {
   stopLocal() async{
     if(playing) {
       await player.stop();
-      playing = false;
+      setState(() {
+        _currentlyPlaying = null;
+        playing = false;
+      });
     }else{
       Scaffold.of(context).showSnackBar(new SnackBar(content: Text("no sound playing!")));
     }
@@ -52,9 +57,9 @@ class _SleepNoiseHomeScreenState extends State<SleepNoiseHomeScreen> {
       body: new ListView.builder(
         itemCount: soundList.length,
         itemBuilder: (context,index)=>
-        new ListTile(leading: CircleAvatar(child: Icon(Icons.play_arrow),),title: Text(soundList[index]),onTap: ()=>playLocal(index),),
+        new ListTile(leading: CircleAvatar(child: Icon(_currentlyPlaying==index?Icons.play_circle_outline:Icons.play_arrow),),title: Text(soundList[index].toString().toUpperCase().replaceAll("_"," ").replaceAll(".MP3", "")),onTap: ()=>playLocal(index),),
       ),
-      floatingActionButton: new FloatingActionButton(mini:true,onPressed: stopLocal,child: Icon(Icons.stop),),
+      floatingActionButton: playing?new FloatingActionButton(mini:true,onPressed: stopLocal,child: Icon(Icons.stop),):null,
       bottomNavigationBar: new BottomNavigationBar(items: [
         BottomNavigationBarItem(icon: Icon(Icons.cloud_circle), title: Text("Sounds")),
         BottomNavigationBarItem(icon: Icon(Icons.settings), title: Text("Settings")),
