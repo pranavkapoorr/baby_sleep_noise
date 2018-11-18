@@ -60,7 +60,7 @@ flutter:
    - assets/sounds/waves_noise.mp3
    - assets/sounds/white_noise.mp3
    - assets/sounds/white_noise1.mp3
-   #- images/a_dot_ham.jpeg
+   - assets/images/baby-main.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
