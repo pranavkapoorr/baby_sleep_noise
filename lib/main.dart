@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
       title: 'Baby Sleep Noise',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
-      home: Scaffold(body: new LogoPage()),
+      home:  new LogoPage(),
     );
   }
 }

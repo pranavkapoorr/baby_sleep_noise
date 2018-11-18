@@ -3,13 +3,13 @@ import 'package:audioplayers/audioplayers.dart';
 import '../utils.dart';
 import 'package:flutter/material.dart';
 
-class SleepNoiseHome extends StatefulWidget {
+class SleepNoiseHomeScreen extends StatefulWidget {
 
   @override
-  _SleepNoiseHomeState createState() => new _SleepNoiseHomeState();
+  _SleepNoiseHomeScreenState createState() => new _SleepNoiseHomeScreenState();
 }
 
-class _SleepNoiseHomeState extends State<SleepNoiseHome> {
+class _SleepNoiseHomeScreenState extends State<SleepNoiseHomeScreen> {
   int _currentlyPlaying;
   AudioCache audio;
   AudioPlayer player;
@@ -47,7 +47,7 @@ class _SleepNoiseHomeState extends State<SleepNoiseHome> {
 
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Baby Sleep Noise"),
+        title: new Text("Sleep Noise"),
       ),
       body: new ListView.builder(
         itemCount: soundList.length,
