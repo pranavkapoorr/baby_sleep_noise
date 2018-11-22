@@ -20,7 +20,7 @@ class _SettingsState extends State<Settings>{
           padding: const EdgeInsets.all(8.0),
           child: Container(
             decoration: BoxDecoration(
-                color: Colors.white,
+                color: Colors.black54,
                 borderRadius: BorderRadius.circular(10.0)
             ),
             child: new ListView(

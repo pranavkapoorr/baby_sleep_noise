@@ -1,4 +1,3 @@
-import 'package:baby_sleep_noise/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:baby_sleep_noise/views/sleep_sounds.dart';
 import 'package:baby_sleep_noise/views/settings.dart';
@@ -27,25 +26,10 @@ class _SleepNoiseHomeScreenState extends State<SleepNoiseHomeScreen> {
 
     return new Scaffold(
       appBar: new AppBar(
+        elevation: 0.0,
         title: new Text("Sleep Noise"),
       ),
-      body:  Container(
-    decoration: BoxDecoration(gradient: myGradient),
-    child: new Scaffold(
-    backgroundColor: Colors.transparent,
-
-    body: Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: Container(
-    decoration: BoxDecoration(
-    color: Colors.white,
-    borderRadius: BorderRadius.circular(10.0)
-    ),
-          child: _children[_currentIndex]
-      ),
-      )
-    )
-      ),
+      body: _children[_currentIndex],
       bottomNavigationBar: new BottomNavigationBar(
         onTap: onTabTapped,
         currentIndex: _currentIndex,

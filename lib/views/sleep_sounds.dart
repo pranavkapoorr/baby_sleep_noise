@@ -49,11 +49,23 @@ class _SleepSoundsPageState extends State<SleepSoundsPage>{
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    body: new ListView.builder(
-        itemCount: soundList.length,
-        itemBuilder: (context,index)=>
-        new ListTile(leading: CircleAvatar(child: Icon(_currentlyPlaying==index?Icons.play_circle_outline:Icons.play_arrow),),title: Text(soundList[index].toString().toUpperCase().replaceAll("_"," ").replaceAll(".MP3", "")),onTap: ()=>playLocal(index),),
-      ),
+    body:  Container(
+        decoration: BoxDecoration(gradient: myGradient),
+        child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.black54,
+                      borderRadius: BorderRadius.circular(10.0)
+                  ),
+                  child: new ListView.builder(
+                    itemCount: soundList.length,
+                    itemBuilder: (context,index)=>
+                    new ListTile(leading: CircleAvatar(child: Icon(_currentlyPlaying==index?Icons.play_circle_outline:Icons.play_arrow),),title: Text(soundList[index].toString().toUpperCase().replaceAll("_"," ").replaceAll(".MP3", "")),onTap: ()=>playLocal(index),),
+                  ),)
+
+        )
+    ),
     floatingActionButton: playing?new FloatingActionButton(mini:true,onPressed: stopLocal,child: Icon(Icons.stop),):null,
   );
 
