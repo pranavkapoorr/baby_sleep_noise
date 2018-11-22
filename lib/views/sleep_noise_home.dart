@@ -23,7 +23,7 @@ class _SleepNoiseHomeScreenState extends State<SleepNoiseHomeScreen> {
 
   playLocal(int index) async{
     if(!playing) {
-      player = await audio.play(soundList[index]);
+      player = await audio.loop(soundList[index]);
       setState(() {
         _currentlyPlaying = index;
         playing = true;
