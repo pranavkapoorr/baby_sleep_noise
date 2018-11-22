@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 List soundList = [
       "blender_noise.mp3",
       "boiling_noise.mp3",
@@ -21,3 +23,22 @@ List soundList = [
       "white_noise.mp3",
       "white_noise1.mp3"
 ];
+
+var settingsGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [Colors.blue,Colors.blue.shade700,Colors.blue.shade500,Colors.blue.shade200,Colors.blue.shade50]
+);
+List<BoxShadow> myShadow = [
+  new BoxShadow(
+      color: Colors.black12,
+      offset: new Offset(2.0, 5.0),
+      blurRadius: 1.0,
+      spreadRadius: 1.0
+  )
+];
+var myGradient = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [Colors.blue.shade700,Colors.blue.shade600,Colors.blue.shade400,Colors.blue.shade200,Colors.blue.shade50]
+);
