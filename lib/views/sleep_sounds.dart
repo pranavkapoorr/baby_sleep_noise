@@ -1,5 +1,5 @@
-import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:baby_sleep_noise/main.dart';
 import '../utils.dart';
 import 'package:flutter/material.dart';
 
@@ -12,13 +12,11 @@ class SleepSoundsPage extends StatefulWidget{
 
 class _SleepSoundsPageState extends State<SleepSoundsPage>{
   int _currentlyPlaying;
-  AudioCache audio;
   AudioPlayer player;
   bool playing = false;
 
   @override
   void initState() {
-    audio = new AudioCache(prefix: "sounds/");
     super.initState();
   }
 
@@ -61,7 +59,7 @@ class _SleepSoundsPageState extends State<SleepSoundsPage>{
                   child: new ListView.builder(
                     itemCount: soundList.length,
                     itemBuilder: (context,index)=>
-                    new ListTile(leading: CircleAvatar(child: Icon(_currentlyPlaying==index?Icons.play_circle_outline:Icons.play_arrow),),title: Text(soundList[index].toString().toUpperCase().replaceAll("_"," ").replaceAll(".MP3", "")),onTap: ()=>playLocal(index),),
+                    new ListTile(leading: CircleAvatar(child: Icon(_currentlyPlaying==index?Icons.play_circle_outline:Icons.play_arrow),),title: Text(soundList[index].toString().toUpperCase().replaceAll("_"," ").replaceAll(".MP3", ""),style: TextStyle(fontSize: 15.0),),onTap: ()=>playLocal(index),),
                   ),)
 
         )

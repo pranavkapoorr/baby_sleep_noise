@@ -27,10 +27,11 @@ class _SleepNoiseHomeScreenState extends State<SleepNoiseHomeScreen> {
     return new Scaffold(
       appBar: new AppBar(
         elevation: 0.0,
-        title: new Text("Sleep Noise"),
+        title: new Text("Sleep Noise",style: TextStyle(fontSize: 27.0),),
       ),
       body: _children[_currentIndex],
       bottomNavigationBar: new BottomNavigationBar(
+        fixedColor: Colors.lightBlue.shade400,
         onTap: onTabTapped,
         currentIndex: _currentIndex,
           items: [

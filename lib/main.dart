@@ -1,5 +1,10 @@
+import 'package:audioplayers/audio_cache.dart';
+
 import './views/logo_page.dart';
 import 'package:flutter/material.dart';
+
+
+AudioCache audio = new AudioCache(prefix: "sounds/");//to make sound keep playing even when phone is locked or app minimised
 
 void main() => runApp(new MyApp());
 
