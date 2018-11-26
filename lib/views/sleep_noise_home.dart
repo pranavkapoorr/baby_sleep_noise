@@ -31,7 +31,7 @@ class _SleepNoiseHomeScreenState extends State<SleepNoiseHomeScreen> {
       ),
       body: _children[_currentIndex],
       bottomNavigationBar: new BottomNavigationBar(
-        fixedColor: Colors.lightBlue.shade400,
+        fixedColor: Colors.lightBlue.shade200,
         onTap: onTabTapped,
         currentIndex: _currentIndex,
           items: [
