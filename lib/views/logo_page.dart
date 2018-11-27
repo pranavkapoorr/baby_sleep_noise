@@ -31,7 +31,13 @@ class _LogoPageState extends State<LogoPage> {
                     left: MediaQuery.of(context).size.width/10,
                       top: MediaQuery.of(context).size.height/10,
                       child: Text("Sleep Noise",style: TextStyle(fontSize: 40.0,fontWeight: FontWeight.w700,fontStyle: FontStyle.italic,),)
-                  )
+                  ),
+                  Positioned(
+                      left: MediaQuery.of(context).size.width/4,
+                      top: MediaQuery.of(context).size.height/5.5,
+                      child: Text("it's time to sleep...",style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w700,fontStyle: FontStyle.italic,),)
+                  ),
+
 
                 ]
         )

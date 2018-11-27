@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:baby_sleep_noise/main.dart';
 import '../utils.dart';
@@ -26,6 +27,7 @@ class _SleepSoundsPageState extends State<SleepSoundsPage>{
       setState(() {
         _currentlyPlaying = index;
         playing = true;
+        new Timer(const Duration(seconds: 5), stopLocal);//added timer
       });
 
     }else{
