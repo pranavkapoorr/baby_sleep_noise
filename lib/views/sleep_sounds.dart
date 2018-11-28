@@ -27,7 +27,7 @@ class _SleepSoundsPageState extends State<SleepSoundsPage>{
       setState(() {
         _currentlyPlaying = index;
         playing = true;
-        new Timer(const Duration(seconds: 5), stopLocal);//added timer
+        new Timer(const Duration(seconds: 60), stopLocal);//added timer
       });
 
     }else{

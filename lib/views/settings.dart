@@ -1,3 +1,4 @@
+import 'package:baby_sleep_noise/main.dart';
 import 'package:baby_sleep_noise/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -29,39 +30,29 @@ class _SettingsState extends State<Settings>{
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: <Widget>[
-                      Align(alignment: Alignment.topLeft,child: Text("Notifications",style: TextStyle(fontSize: 15.0,fontWeight: FontWeight.w500),)),
+                      Align(alignment: Alignment.topLeft,child: Text("PlayTime",style: TextStyle(fontSize: 15.0,fontWeight: FontWeight.w500),)),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: <Widget>[
-                            InkWell(
-                              child: Container(
-                                padding: EdgeInsets.all(8.0),
-                                width: deviceSize.width,
-                                decoration: BoxDecoration(
-                                    gradient: settingsGradient,
-                                    boxShadow: myShadow,
-                                    border: Border.all(color: Colors.grey.shade200),
-                                    borderRadius: BorderRadius.only(topLeft: Radius.circular(8.0))
-                                ),
-                                child: Text("Push",style: TextStyle(color: Colors.white),),
-                              ),
-                              onTap: (){},
-                            ),
-                            InkWell(
-                              child: Container(
-                                padding: EdgeInsets.all(8.0),
-                                width: deviceSize.width,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    boxShadow: myShadow,
-                                    borderRadius: BorderRadius.only(bottomRight: Radius.circular(8.0))
-                                ),
-                                child: Text("Email",style: TextStyle(color: Colors.black),),
-                              ),
-                              onTap: (){},
-                            ),
-                          ],
+                        child: Container(
+                          padding: EdgeInsets.all(8.0),
+                          width: deviceSize.width,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              boxShadow: myShadow,
+                              border: Border.all(color: Colors.grey.shade200),
+                              borderRadius: BorderRadius.only(topLeft: Radius.circular(8.0))
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Slider(value: playTime/100, onChanged: (val){
+                                setState(() {
+                                  playTime = val * 100;
+                                });
+                              }),
+                              Text((playTime).round().toString() + " sec",style: TextStyle(color: Colors.black),),
+                            ],
+                          )
                         ),
                       ),
                       Text("What kind of notification would you like to receive..?",style: TextStyle(color: Colors.grey,fontSize: 12.0),)
