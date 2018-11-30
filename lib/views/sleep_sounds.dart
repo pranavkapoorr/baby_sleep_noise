@@ -19,11 +19,23 @@ class _SleepSoundsPageState extends State<SleepSoundsPage>{
   @override
   void initState() {
     super.initState();
+    audio.loadAll(soundList);
+  }
+
+  _positionHandler(Duration  p) {
+  print('Current position: $p');
+  if(p.inSeconds==9){
+    setState(() {
+      player.seek(new Duration(seconds: 1));
+      print("replaying......");
+    });
+  }
   }
 
   playLocal(int index) async{
     if(!playing) {
-      player = await audio.loop(soundList[index]);
+      player = await audio.play(soundList[index]);
+      player.positionHandler = _positionHandler;
       setState(() {
         _currentlyPlaying = index;
         playing = true;
@@ -70,7 +82,7 @@ class _SleepSoundsPageState extends State<SleepSoundsPage>{
             playing?Positioned(
               bottom: 0.0,
               child: Container(
-                color: Colors.black87,
+                color: Colors.black,
                 width: MediaQuery.of(context).size.width,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -89,6 +101,7 @@ class _SleepSoundsPageState extends State<SleepSoundsPage>{
   @override
   void dispose() {
     playing = false;
+    audio.clearCache();
     super.dispose();
   }
 }

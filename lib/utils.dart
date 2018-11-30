@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-List soundList = [
+List<String> soundList = [
       "blender_noise.mp3",
       "boiling_noise.mp3",
       "dryer_noise.mp3",
