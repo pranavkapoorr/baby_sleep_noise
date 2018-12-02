@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:baby_sleep_noise/main.dart';
 import '../utils.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +11,7 @@ class SleepSoundsPage extends StatefulWidget{
 }
 
 class _SleepSoundsPageState extends State<SleepSoundsPage>{
-  int _currentlyPlaying;
-  AudioPlayer player;
-  bool playing = false;
+
 
   @override
   void initState() {
@@ -37,7 +34,7 @@ class _SleepSoundsPageState extends State<SleepSoundsPage>{
       player = await audio.play(soundList[index]);
       player.positionHandler = _positionHandler;
       setState(() {
-        _currentlyPlaying = index;
+        currentlyPlaying = index;
         playing = true;
         new Timer(const Duration(seconds: 60), stopLocal);//added timer
       });
@@ -51,7 +48,7 @@ class _SleepSoundsPageState extends State<SleepSoundsPage>{
     if(playing) {
       await player.stop();
       setState(() {
-        _currentlyPlaying = null;
+        currentlyPlaying = null;
         playing = false;
       });
     }else{
@@ -75,7 +72,7 @@ class _SleepSoundsPageState extends State<SleepSoundsPage>{
                       child: new ListView.builder(
                         itemCount: soundList.length,
                         itemBuilder: (context,index)=>
-                        new ListTile(leading: CircleAvatar(child: Icon(_currentlyPlaying==index?Icons.play_circle_outline:Icons.play_arrow),),title: Text(soundList[index].toString().toUpperCase().replaceAll("_"," ").replaceAll(".MP3", ""),style: TextStyle(fontSize: 15.0),),onTap: ()=>playLocal(index),),
+                        new ListTile(leading: CircleAvatar(child: Icon(currentlyPlaying==index?Icons.play_circle_outline:Icons.play_arrow),),title: Text(soundList[index].toString().toUpperCase().replaceAll("_"," ").replaceAll(".MP3", ""),style: TextStyle(fontSize: 15.0),),onTap: ()=>playLocal(index),),
                       ),)
 
             ),
@@ -87,7 +84,7 @@ class _SleepSoundsPageState extends State<SleepSoundsPage>{
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Text(soundList[_currentlyPlaying].toString().toUpperCase().replaceAll("_"," ").replaceAll(".MP3", ""),style: TextStyle(fontSize: 12.0),),
+                    Text(soundList[currentlyPlaying].toString().toUpperCase().replaceAll("_"," ").replaceAll(".MP3", ""),style: TextStyle(fontSize: 12.0),),
                     new IconButton(icon: Icon(Icons.stop,color: Colors.red,), onPressed: ()=>stopLocal(),)
                   ],
                 ),
@@ -100,7 +97,6 @@ class _SleepSoundsPageState extends State<SleepSoundsPage>{
 
   @override
   void dispose() {
-    playing = false;
     audio.clearCache();
     super.dispose();
   }
