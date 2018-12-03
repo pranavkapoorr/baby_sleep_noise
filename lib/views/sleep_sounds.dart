@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:baby_sleep_noise/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../utils.dart';
 import 'package:flutter/material.dart';
+
 
 class SleepSoundsPage extends StatefulWidget{
 
@@ -11,19 +13,25 @@ class SleepSoundsPage extends StatefulWidget{
 }
 
 class _SleepSoundsPageState extends State<SleepSoundsPage>{
-
+  SharedPreferences sp;
+  int playTime;
 
   @override
   void initState() {
-    super.initState();
+    _loadPlaytime();
     audio.loadAll(soundList);
+  }
+
+  _loadPlaytime()async{
+    sp = await SharedPreferences.getInstance();
+    playTime = sp.getInt("playTime");
   }
 
   _positionHandler(Duration  p) {
   print('Current position: $p');
-  if(p.inSeconds==9){
+  if(p.inSeconds==8){ //looping after 8 seconds
     setState(() {
-      player.seek(new Duration(seconds: 1));
+      player.seek(new Duration(seconds: 2));
       print("replaying......");
     });
   }
@@ -36,7 +44,7 @@ class _SleepSoundsPageState extends State<SleepSoundsPage>{
       setState(() {
         currentlyPlaying = index;
         playing = true;
-        new Timer(const Duration(seconds: 60), stopLocal);//added timer
+        new Timer(Duration(seconds: playTime), stopLocal);//added timer
       });
 
     }else{

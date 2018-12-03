@@ -1,6 +1,6 @@
-import 'package:baby_sleep_noise/main.dart';
 import 'package:baby_sleep_noise/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Settings extends StatefulWidget{
   @override
@@ -8,11 +8,35 @@ class Settings extends StatefulWidget{
 }
 class _SettingsState extends State<Settings>{
   bool _switchValue = false;
+  SharedPreferences sp;
+  int playTime = 0;
+
+  @override
+  void initState() {
+    _loadPlaytime();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    sp.setInt("playTime", playTime);
+    super.dispose();
+  }
+
+  _loadPlaytime()async{
+    sp = await SharedPreferences.getInstance();
+    playTime = sp.getInt("playTime");
+    print("lodaded plaTyime : $playTime");
+    if(playTime==null || playTime==0){
+      playTime = 1;
+    }
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context){
     Size deviceSize = MediaQuery.of(context).size;
-    return Container(
+    return playTime!=null?Container(
       decoration: BoxDecoration(gradient: myGradient),
       child: new Scaffold(
         backgroundColor: Colors.transparent,
@@ -47,7 +71,7 @@ class _SettingsState extends State<Settings>{
                             children: <Widget>[
                               Slider(value: playTime/100, onChanged: (val){
                                 setState(() {
-                                  playTime = val * 100;
+                                  playTime = val.round() * 100;
                                 });
                               }),
                               Text((playTime).round().toString() + " sec",style: TextStyle(color: Colors.black),),
@@ -228,8 +252,9 @@ class _SettingsState extends State<Settings>{
           ),
         ),
       ),
-    );
+    ):Center(child: CircularProgressIndicator(),);
   }
+
 
   Widget myContainer(double width, Color color,BorderRadius borderRadius,Widget child) => new Container(
     width: width,
