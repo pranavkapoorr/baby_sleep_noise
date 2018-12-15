@@ -31,7 +31,7 @@ class _SleepSoundsPageState extends State<SleepSoundsPage>{
   print('Current position: $p');
   if(p.inSeconds==8){ //looping after 8 seconds
     setState(() {
-      player.seek(new Duration(seconds: 2));
+      player.seek(new Duration(seconds: 1));
       print("replaying......");
     });
   }
