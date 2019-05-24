@@ -29,7 +29,7 @@ class _SleepSoundsPageState extends State<SleepSoundsPage>{
 
   _positionHandler(Duration  p) {
   print('Current position: $p');
-  if(p.inSeconds==8){ //looping after 8 seconds
+  if(p.inSeconds==9){ //looping after 8 seconds
     setState(() {
       player.seek(new Duration(seconds: 1));
       print("replaying......");
@@ -60,7 +60,10 @@ class _SleepSoundsPageState extends State<SleepSoundsPage>{
         playing = false;
       });
     }else{
-      Scaffold.of(context).showSnackBar(new SnackBar(content: Text("no sound playing!")));
+      if(context!=null) {
+        Scaffold.of(context).showSnackBar(
+            new SnackBar(content: Text("no sound playing!")));
+      }
     }
   }
 
