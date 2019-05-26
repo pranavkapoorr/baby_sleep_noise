@@ -38,7 +38,12 @@ class _LogoPageState extends State<LogoPage> {
                       child: Text("it's time to sleep...",style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w700,fontStyle: FontStyle.italic,),)
                   ),
 
+                  Positioned(
+                      left: MediaQuery.of(context).size.width/4,
+                      bottom: MediaQuery.of(context).size.height/9,
+                      child: Text("Copyright © 2019 pranavkapoorr",style: TextStyle(fontSize: 17.0,fontWeight: FontWeight.w700,fontStyle: FontStyle.italic,),)
 
+                  )
                 ]
         )
      );

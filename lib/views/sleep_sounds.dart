@@ -20,6 +20,7 @@ class _SleepSoundsPageState extends State<SleepSoundsPage>{
   void initState() {
     _loadPlaytime();
     audio.loadAll(soundList);
+    print("playTime -> $playTime");
   }
 
   _loadPlaytime()async{
@@ -77,27 +78,30 @@ class _SleepSoundsPageState extends State<SleepSoundsPage>{
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
                       decoration: BoxDecoration(
-                          color: Colors.black54,
+                          color: Colors.black87,
                           borderRadius: BorderRadius.circular(10.0)
                       ),
                       child: new ListView.builder(
                         itemCount: soundList.length,
                         itemBuilder: (context,index)=>
-                        new ListTile(leading: CircleAvatar(child: Icon(currentlyPlaying==index?Icons.play_circle_outline:Icons.play_arrow),),title: Text(soundList[index].toString().toUpperCase().replaceAll("_"," ").replaceAll(".MP3", ""),style: TextStyle(fontSize: 15.0),),onTap: ()=>playLocal(index),),
+                        new ListTile(leading: CircleAvatar(backgroundColor: Colors.black,foregroundColor: Colors.white,child: Icon(currentlyPlaying==index?Icons.play_circle_outline:Icons.play_arrow),),title: Text(soundList[index].toString().toUpperCase().replaceAll("_"," ").replaceAll(".MP3", ""),style: TextStyle(fontSize: 15.0),),onTap: ()=>playLocal(index),),
                       ),)
 
             ),
             playing?Positioned(
               bottom: 0.0,
-              child: Container(
-                color: Colors.black,
-                width: MediaQuery.of(context).size.width,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Text(soundList[currentlyPlaying].toString().toUpperCase().replaceAll("_"," ").replaceAll(".MP3", ""),style: TextStyle(fontSize: 12.0),),
-                    new IconButton(icon: Icon(Icons.stop,color: Colors.red,), onPressed: ()=>stopLocal(),)
-                  ],
+              child: GestureDetector(
+                onTap: ()=>_ModalBottomSheet(context,soundList[currentlyPlaying].toString().toUpperCase().replaceAll("_"," ").replaceAll(".MP3", "")),
+                child: Container(
+                  color: Colors.black,
+                  width: MediaQuery.of(context).size.width,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Text(soundList[currentlyPlaying].toString().toUpperCase().replaceAll("_"," ").replaceAll(".MP3", ""),style: TextStyle(fontSize: 12.0),),
+                      new IconButton(icon: Icon(Icons.stop,color: Colors.red,), onPressed: ()=>stopLocal(),)
+                    ],
+                  ),
                 ),
               ),
             ):Text('')
@@ -105,6 +109,36 @@ class _SleepSoundsPageState extends State<SleepSoundsPage>{
         )
     ),
   );
+
+  _ModalBottomSheet(BuildContext context, String soundName){
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc){
+          return Container(
+            color: Colors.black,
+            child: new Wrap(
+              children: <Widget>[
+                new ListTile(
+                    leading: new Icon(Icons.play_circle_filled),
+                    title: new Text(soundName),
+                    onTap: () => {}
+                ),
+                new ListTile(
+                    leading: new Icon(Icons.stop,color: Colors.red,),
+                    title: new Text('Stop'),
+                    onTap: () => stopLocal()
+                ),
+                new ListTile(
+                  leading: new Icon(Icons.videocam),
+                  title: new Text('Video'),
+                  onTap: () => {},
+                ),
+              ],
+            ),
+          );
+        }
+    );
+  }
 
   @override
   void dispose() {

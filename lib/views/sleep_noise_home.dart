@@ -11,15 +11,20 @@ class SleepNoiseHomeScreen extends StatefulWidget {
 class _SleepNoiseHomeScreenState extends State<SleepNoiseHomeScreen> {
 
   int _currentIndex = 0;
-  final List<Widget> _children = [
-    new SleepSoundsPage(),
-    new Settings()
-  ];
+  final List<Widget> _children = new List();
 
+  @override
+  void initState() {
+    _children.add(new SleepSoundsPage());
+    _children.add(new Settings());
+    super.initState();
+  }
 
-
-
-
+  @override
+  void dispose() {
+    _children.clear();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
