@@ -4,6 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../utils.dart';
 import 'package:flutter/material.dart';
 
+import './now_playing.dart';
+
 
 class SleepSoundsPage extends StatefulWidget{
 
@@ -84,7 +86,12 @@ class _SleepSoundsPageState extends State<SleepSoundsPage>{
                       child: new ListView.builder(
                         itemCount: soundList.length,
                         itemBuilder: (context,index)=>
-                        new ListTile(leading: CircleAvatar(backgroundColor: Colors.black,foregroundColor: Colors.white,child: Icon(currentlyPlaying==index?Icons.play_circle_outline:Icons.play_arrow),),title: Text(soundList[index].toString().toUpperCase().replaceAll("_"," ").replaceAll(".MP3", ""),style: TextStyle(fontSize: 15.0),),onTap: ()=>playLocal(index),),
+                        new Wrap(
+                          children: <Widget>[
+                            new ListTile(leading: CircleAvatar(backgroundColor: Colors.black,foregroundColor: Colors.white,child: Icon(currentlyPlaying==index?Icons.play_circle_outline:Icons.play_arrow),),title: Text(soundList[index].toString().toUpperCase().replaceAll("_"," ").replaceAll(".MP3", ""),style: TextStyle(fontSize: 15.0),),onTap: ()=>playLocal(index),),
+                            index<soundList.length-1?new Divider(indent:70.0,height: 0.0,color: Colors.white,):Text("")
+                          ],
+                        )
                       ),)
 
             ),
@@ -110,34 +117,14 @@ class _SleepSoundsPageState extends State<SleepSoundsPage>{
     ),
   );
 
-  _ModalBottomSheet(BuildContext context, String soundName){
-    showModalBottomSheet(
-        context: context,
-        builder: (BuildContext bc){
-          return Container(
-            color: Colors.black,
-            child: new Wrap(
-              children: <Widget>[
-                new ListTile(
-                    leading: new Icon(Icons.play_circle_filled),
-                    title: new Text(soundName),
-                    onTap: () => {}
-                ),
-                new ListTile(
-                    leading: new Icon(Icons.stop,color: Colors.red,),
-                    title: new Text('Stop'),
-                    onTap: () => stopLocal()
-                ),
-                new ListTile(
-                  leading: new Icon(Icons.videocam),
-                  title: new Text('Video'),
-                  onTap: () => {},
-                ),
-              ],
-            ),
-          );
-        }
-    );
+  _ModalBottomSheet(BuildContext context, String soundName) async {
+    await Navigator.of(context).push(new MaterialPageRoute(
+        builder: (BuildContext context) {
+          return new NowPlaying(soundName);
+        },
+        fullscreenDialog: true
+    ));
+
   }
 
   @override
